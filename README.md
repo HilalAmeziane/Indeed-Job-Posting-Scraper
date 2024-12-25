@@ -45,6 +45,12 @@ Follow these steps to run the project locally:
    git clone <YOUR_GIT_URL>
    cd <PROJECT_NAME>
 
+---  
+Install Dependencies
+Install all required dependencies using npm:
+### Instructions
+- Replace `<YOUR_GIT_URL>` and `<PROJECT_NAME>` with the appropriate repository URL and project name.
+- Add your `LICENSE` file if not already present.
 
 ---
 ### Instructions
