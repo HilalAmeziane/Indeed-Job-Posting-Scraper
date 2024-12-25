@@ -40,26 +40,34 @@ export async function evaluateTitle(page) {
 export async function evaluateLocation(page) {
     return await page.evaluate(() => {
         const locationSelectors = [
+            // Sélecteurs spécifiques pour la page de détail
             '[data-testid="jobsearch-JobInfoHeader-locationText"]',
             '[data-testid="job-location"]',
             '.jobsearch-JobInfoHeader-subtitle div[data-testid="inlineHeader-companyLocation"]',
             '.jobsearch-CompanyInfoContainer div[data-testid="inlineHeader-companyLocation"]',
-            '.jobsearch-JobInfoHeader-subtitle .icl-u-textColor--secondary',
-            '.jobsearch-InlineCompanyRating div:nth-child(2)',
+            // Sélecteurs pour la page de recherche
+            '.company_location',
+            '.job-location',
             '[class*="JobLocation"]',
-            '.job-location'
+            // Sélecteurs de secours
+            '[data-testid*="location"]',
+            '.location'
         ];
 
         for (const selector of locationSelectors) {
             const element = document.querySelector(selector);
             if (element) {
                 const text = element.textContent.trim();
+                // Supprime le nom de l'entreprise s'il est présent
+                const locationParts = text.split('•');
+                const locationText = locationParts[locationParts.length - 1].trim();
+                
                 // Regex pour extraire "Ville, XX" (où XX est le code canton)
-                const match = text.match(/([^,]+),\s*([A-Z]{2})/);
+                const match = locationText.match(/([^,]+),\s*([A-Z]{2})/);
                 if (match) {
                     return `${match[1].trim()}, ${match[2]}`;
                 }
-                return text;
+                return locationText;
             }
         }
         return 'Localisation non trouvée';
