@@ -53,8 +53,3 @@ Install all required dependencies using npm:
 - Add your `LICENSE` file if not already present.
 
 ---
-### Instructions
-- Replace `<YOUR_GIT_URL>` and `<PROJECT_NAME>` with the appropriate repository URL and project name.
-- Add your `LICENSE` file if not already present.
-
-You can copy and paste this directly into your `README.md` file on GitHub! 🚀
