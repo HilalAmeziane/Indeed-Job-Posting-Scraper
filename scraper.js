@@ -16,7 +16,8 @@ async function scrapeJobInfo(url) {
         });
         console.log('Page chargée avec succès...');
 
-        await page.waitForTimeout(5000);
+        // Utiliser setTimeout avec une Promise au lieu de page.waitForTimeout
+        await new Promise(resolve => setTimeout(resolve, 5000));
         console.log('Attente de 5 secondes terminée...');
 
         const pageTitle = await page.title();
@@ -25,7 +26,7 @@ async function scrapeJobInfo(url) {
         if (pageTitle.includes('Indeed.com Captcha') || pageTitle.includes('Request Blocked')) {
             console.log('⚠️ Captcha détecté ! Vous avez 2 minutes pour le résoudre...');
             shouldCloseBrowser = false;
-            await page.waitForTimeout(120000);
+            await new Promise(resolve => setTimeout(resolve, 120000));
             
             const newTitle = await page.title();
             if (newTitle.includes('Indeed.com Captcha') || newTitle.includes('Request Blocked')) {

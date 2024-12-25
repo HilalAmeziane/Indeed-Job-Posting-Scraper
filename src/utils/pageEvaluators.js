@@ -1,92 +1,53 @@
 export async function evaluateTitle(page) {
-    return await page.evaluate(() => {
-        // Sélecteurs pour les titres de poste individuels
-        const jobTitleSelectors = [
-            // Page de détail du poste
-            '[data-testid="jobsearch-JobInfoHeader-title"]',
-            'h1.jobsearch-JobInfoHeader-title',
-            '.jobsearch-JobInfoHeader-title',
-            'h1[class*="JobInfoHeader"]',
-            'h1[class*="jobtitle"]',
-            '.jobsearch-ViewJobLayout-jobDisplay h1',
-            // Page de recherche
-            'h2.jobsearch-JobInfoHeader-title',
-            '.jobsearch-SerpJobCard-title',
-            '[data-testid="jobTitle"]',
-            '.job-title'
-        ];
-
-        for (const selector of jobTitleSelectors) {
-            const element = document.querySelector(selector);
-            if (element) {
-                return element.textContent.trim();
+    try {
+        // Attendre que le titre soit chargé avec les sélecteurs Indeed
+        await page.waitForSelector('h1.jobsearch-JobInfoHeader-title', { timeout: 10000 });
+        
+        const title = await page.evaluate(() => {
+            const titleElement = document.querySelector('h1.jobsearch-JobInfoHeader-title');
+            
+            if (titleElement) {
+                return titleElement.innerText.trim();
             }
-        }
+            return 'Titre non trouvé';
+        });
 
-        // Si aucun sélecteur ne fonctionne, chercher dans tous les h1/h2
-        const titleElements = [...document.querySelectorAll('h1, h2')];
-        for (const element of titleElements) {
-            if (element.textContent.length > 0 && !element.textContent.includes('Indeed')) {
-                return element.textContent.trim();
-            }
-        }
-
-        return 'Titre non trouvé';
-    });
+        console.log('Titre brut trouvé:', title);
+        return title;
+    } catch (error) {
+        console.error('Erreur lors de la récupération du titre:', error);
+        return 'Erreur lors de la récupération du titre';
+    }
 }
 
 export async function evaluateLocation(page) {
-    return await page.evaluate(() => {
-        const locationSelectors = [
-            // Sélecteurs pour la page de détail
-            '[data-testid="jobsearch-JobInfoHeader-locationText"]',
-            '[data-testid="job-location"]',
-            '.jobsearch-JobInfoHeader-subtitle div[data-testid="inlineHeader-companyLocation"]',
-            '.jobsearch-CompanyInfoContainer div[data-testid="inlineHeader-companyLocation"]',
-            '.jobsearch-InlineCompanyRating div:nth-child(2)',
-            // Sélecteurs pour la page de recherche
-            '.company_location',
-            '.job-location',
-            '[class*="JobLocation"]',
-            // Sélecteurs génériques
-            '[data-testid*="location"]',
-            '.location',
-            // Nouveaux sélecteurs
-            '.css-1wh2kri',  // Sélecteur spécifique pour certaines pages Indeed
-            '[class*="CompanyLocation"]'
-        ];
-
-        for (const selector of locationSelectors) {
-            const element = document.querySelector(selector);
-            if (element) {
-                let locationText = element.textContent.trim();
+    try {
+        // Attendre que la localisation soit chargée avec les sélecteurs Indeed
+        await page.waitForSelector('.jobsearch-CompanyInfoContainer .companyLocation', { timeout: 10000 });
+        
+        const location = await page.evaluate(() => {
+            const locationElement = document.querySelector('.jobsearch-CompanyInfoContainer .companyLocation');
+            
+            if (locationElement) {
+                const fullText = locationElement.innerText.trim();
+                console.log('Texte complet de localisation:', fullText);
                 
-                // Nettoyer le texte
-                // 1. Supprimer le nom de l'entreprise s'il est présent
-                if (locationText.includes('•')) {
-                    locationText = locationText.split('•').pop().trim();
+                // Extraire la ville et le canton (format typique: "Ville, Canton")
+                const locationParts = fullText.split(',');
+                if (locationParts.length >= 2) {
+                    const city = locationParts[0].trim();
+                    const canton = locationParts[1].trim();
+                    return `${city}, ${canton}`;
                 }
-                
-                // 2. Supprimer les parenthèses et leur contenu
-                locationText = locationText.replace(/\([^)]*\)/g, '').trim();
-                
-                // 3. Chercher spécifiquement le format "Ville, XX"
-                const match = locationText.match(/([^,]+),\s*([A-Z]{2})/);
-                if (match) {
-                    return `${match[1].trim()}, ${match[2]}`;
-                }
-
-                // 4. Si pas de match, essayer de trouver juste la ville et le canton
-                const words = locationText.split(/[\s,]+/);
-                for (let i = 0; i < words.length - 1; i++) {
-                    if (words[i + 1].match(/^[A-Z]{2}$/)) {
-                        return `${words[i]}, ${words[i + 1]}`;
-                    }
-                }
-
-                return locationText;
+                return fullText;
             }
-        }
-        return 'Localisation non trouvée';
-    });
+            return 'Localisation non trouvée';
+        });
+
+        console.log('Localisation finale:', location);
+        return location;
+    } catch (error) {
+        console.error('Erreur lors de la récupération de la localisation:', error);
+        return 'Erreur lors de la récupération de la localisation';
+    }
 }
