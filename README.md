@@ -86,13 +86,6 @@ https://www.indeed.com/job-2
 ...
 ```
 
-## 💡 Pro Tips
-
-- 🔍 Keep your job URLs organized by category
-- 📅 Export results regularly to track your application history
-- 📊 Use the exported data to analyze salary ranges and required skills
-- 🏷️ Add notes to the exported CSV for tracking application status
-
 ## 🛠️ Tech Stack
 
 - **Frontend**: React + TypeScript + Tailwind CSS
@@ -104,8 +97,6 @@ https://www.indeed.com/job-2
 
 - [ ] Support for other job platforms
 - [ ] Application tracking system
-- [ ] Automatic CV keyword matching
-- [ ] Email notifications for new matching jobs
 
 ## 🤝 Contributing
 
@@ -126,8 +117,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Indeed for providing job listings
 - All contributors who help improve this tool
 
----
 
-<p align="center">
-Made with ❤️ for job seekers who value their time
 </p>
