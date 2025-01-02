@@ -112,6 +112,16 @@ Found a bug? Want to add a feature? Contributions are welcome!
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## ⚖️ Legal Disclaimer
+
+This project is for educational purposes only. Before using this tool:
+- Ensure you comply with Indeed's Terms of Service
+- Respect the website's robots.txt and rate limiting
+- Do not use the collected data for commercial purposes
+- Be aware that web scraping might be subject to legal restrictions in your jurisdiction
+
+The creators and contributors of this project are not responsible for any misuse or legal consequences.
+
 ## 🙏 Acknowledgments
 
 - Indeed for providing job listings
