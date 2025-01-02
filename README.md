@@ -37,7 +37,7 @@ This tool lets you focus on what matters: **crafting perfect applications** whil
 
 ```bash
 # Clone the repository
-git clone [your-repo-url]
+git clone [https://github.com/HilalAmeziane/IndeedCrawler.git]
 cd indeed-job-scraper
 
 # Install frontend dependencies
