@@ -2,7 +2,7 @@
 
 > Save hours in your job search by automating the tedious part
 
-![Application Screenshot](.github/screenshot.png)
+![Application Screenshot](.github/HilalAmeziane/IndeedCrawler/blob/main/project.png)
 
 ## 🎯 Why This Tool?
 
