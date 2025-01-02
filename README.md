@@ -1,4 +1,4 @@
-# 🚀 Indeed Job Scraper
+# 🚀 IndeedCrawler
 
 > Save hours in your job search by automating the tedious part
 
