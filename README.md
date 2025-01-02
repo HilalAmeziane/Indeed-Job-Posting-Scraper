@@ -131,9 +131,3 @@ This project is for educational purposes only. Before using this tool:
 - Be aware that web scraping might be subject to legal restrictions in your jurisdiction
 
 The creators and contributors of this project are not responsible for any misuse or legal consequences.
-
----
-
-<p align="center">
-Made with ❤️ for job seekers who value their time
-</p>
