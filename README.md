@@ -25,10 +25,6 @@ This tool lets you focus on what matters: **crafting perfect applications** whil
    - 📝 Full job descriptions
 3. **Output**: Get a clean CSV export with all details
 
-## 🎥 Demo
-
-[Place your screenshot here]
-
 ## 🚀 Getting Started
 
 ### Prerequisites
